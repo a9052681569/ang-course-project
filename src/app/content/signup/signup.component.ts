@@ -5,11 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
-  constructor() { }
-
-  ngOnInit() {
+  public signup(value: {username: string, email: string, password: string, confirmpassword: string}) {
+    console.log(value);
   }
 
 }

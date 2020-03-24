@@ -8,8 +8,16 @@ import { MatButtonModule,
   MatInputModule,
   MatToolbarModule,
   MatBadgeModule,
-  MatMenuModule
+  MatMenuModule,
+  MatCardModule
 } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsernameValidatorDirective } from './directives/username-validator.directive';
+import { ValidatorsService } from './servises/validators/validators.service';
+import { EqualValidatorDirective } from './directives/equal-validator.directive';
+import { UniqUsernameValidatorDirective } from './directives/uniq-username-validator.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 export const modules: any[] = [
   CommonModule,
@@ -21,7 +29,12 @@ export const modules: any[] = [
   MatFormFieldModule,
   MatInputModule,
   MatBadgeModule,
-  MatMenuModule
+  MatMenuModule,
+  MatCardModule,
+  FormsModule,
+  HttpClientModule,
+  FlexLayoutModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({
@@ -29,6 +42,8 @@ export const modules: any[] = [
     CommonModule,
     modules
   ],
-  exports: [modules]
+  exports: [...modules, UsernameValidatorDirective, EqualValidatorDirective, UniqUsernameValidatorDirective],
+  declarations: [UsernameValidatorDirective, EqualValidatorDirective, UniqUsernameValidatorDirective],
+  providers: [ValidatorsService]
 })
 export class SharedModule { }

@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { CustomPreloadService } from './custom-preload.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,10 @@ import { AuthGuard } from './guards/auth/auth.guard';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    CustomPreloadService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

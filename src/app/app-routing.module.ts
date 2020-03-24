@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { CustomPreloadService } from './custom-preload.service';
 
 
 const routes: Routes = [
@@ -11,7 +12,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: CustomPreloadService})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
