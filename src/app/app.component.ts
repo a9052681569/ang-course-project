@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/typings';
+import { IEvent } from './interfaces/i-event';
+import { events$ } from './mock/data';
+import { Observable } from 'rxjs';
+import { softAppearAnimation } from './animations/soft-appear/soft-appear.animation';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +11,4 @@ import { MatSidenav } from '@angular/material/typings';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public drawer: MatSidenav;
-
-  public setDrawerControl(drawer: MatSidenav): void {
-    Promise.resolve().then(_ => this.drawer = drawer);
-  }
 }

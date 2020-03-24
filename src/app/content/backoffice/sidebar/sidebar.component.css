@@ -7,3 +7,6 @@ mat-container {
 mat-sidenav-content {
     padding: 10px;
 }
+mat-list-item {
+    cursor: pointer;
+}

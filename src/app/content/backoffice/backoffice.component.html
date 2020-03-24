@@ -1,0 +1,4 @@
+<app-header [drawer]='drawer'></app-header>
+<app-sidebar (setSideBarControl)='setDrawerControl($event)'>
+    <router-outlet></router-outlet>
+</app-sidebar>

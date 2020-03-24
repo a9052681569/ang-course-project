@@ -1,0 +1,11 @@
+<mat-form-field>
+    <input matInput placeholder="Input" (input)='search($event)'>
+</mat-form-field>
+
+<div *ngIf='(events$ | async | eventsFilter:searchText) as events; else loading'>
+    <div @softAppearAnimation *ngFor='let event of events'>{{event.text}}</div>
+</div>
+
+<ng-template #loading>
+    <span>Loading...</span>
+</ng-template>

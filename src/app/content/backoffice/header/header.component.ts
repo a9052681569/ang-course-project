@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { MatSidenav } from '@angular/material/typings';
+import { StyleObject } from 'src/app/interfaces/style-object';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +12,10 @@ export class HeaderComponent implements OnInit {
   @Input()
   public drawer: MatSidenav;
 
-  public headerStyles: SafeStyle = this.sanitizer.bypassSecurityTrustStyle('color: orange');
-
-  public constructor(private sanitizer: DomSanitizer) { }
+  public headerStyles: StyleObject = {
+    color: 'orange',
+    'font-size': '18px'
+  };
 
   public ngOnInit() {
   }
