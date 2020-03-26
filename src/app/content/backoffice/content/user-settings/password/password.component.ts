@@ -9,14 +9,14 @@ import { ValidatorsService } from 'src/app/shared/servises/validators/validators
 })
 export class PasswordComponent implements OnInit {
 
-  public formGroup: FormGroup;
+  public changePasswordGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private validatorService: ValidatorsService) {
     this.createForm();
   }
   private createForm() {
-    this.formGroup = this.formBuilder.group({
-      oldPass: '',
+    this.changePasswordGroup = this.formBuilder.group({
+      oldPass: ['', [Validators.required]],
       newPassword: this.formBuilder.group({
         password: ['', Validators.required],
         confirmpassword: ['', Validators.required]

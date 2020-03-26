@@ -1,1 +1,67 @@
-<p>address works!</p>
+<div fxLayout='row' fxLayoutAlign='space-evenly stretch'>
+    <form [formGroup]='addressForm'>
+        <div>
+            <span>Address</span>
+            <button mat-raised-button type="button" (click)='addAddress()'>
+                <mat-icon>add</mat-icon>
+            </button>
+            <button mat-raised-button color='primary' type="submit"
+            [disabled]='addressForm.invalid || addressForm.pristine'>Save</button>
+        </div>
+
+        <div formArrayName='address'>
+            <mat-card *ngFor="let form of addressGroups.controls; index as i">
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutAlign='end' *ngIf='addressGroups.controls.length > 1'>
+                        <button mat-raised-button type="button" (click)='removeAddress(i)'>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    <div fxLayout='row' fxLayoutAlign='space-evenly stretch'>
+                        <mat-form-field fxFlex='100%'>
+                            <mat-label>Street</mat-label>
+                            <input
+                                matInput
+                                placeholder="Street"
+                                type="text"
+                                [formControl]='form.get("street")'
+                            >
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout='row' fxLayoutAlign='space-evenly stretch'>
+                        <mat-form-field fxFlex='30%'>
+                            <mat-label>City</mat-label>
+                            <input
+                                matInput
+                                placeholder="City"
+                                type="text"
+                                [formControl]='form.get("city")'
+                            >
+                        </mat-form-field>
+                        <mat-form-field fxFlex='30%'>
+                            <mat-label>State</mat-label>
+                            <input
+                                matInput
+                                placeholder="State"
+                                type="text"
+                                [formControl]='form.get("state")'
+                            >
+                        </mat-form-field>
+                        <mat-form-field fxFlex='30%'>
+                            <mat-label>Zip code</mat-label>
+                            <input
+                                matInput
+                                placeholder="Zip code"
+                                type="text"
+                                [formControl]='form.get("zip")'
+                            >
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        
+    </form> 
+</div>
+
+

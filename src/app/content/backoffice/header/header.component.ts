@@ -1,23 +1,29 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatSidenav } from '@angular/material/typings';
 import { StyleObject } from 'src/app/interfaces/style-object';
+import { IRootState } from 'src/app/store';
+import { Store } from '@ngrx/store';
+import { LogoutPending } from 'src/app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   @Input()
   public drawer: MatSidenav;
+
+  public constructor(private store: Store<IRootState>) {}
 
   public headerStyles: StyleObject = {
     color: 'orange',
     'font-size': '18px'
   };
 
-  public ngOnInit() {
+  public logout() {
+    this.store.dispatch(new LogoutPending());
   }
 
 }

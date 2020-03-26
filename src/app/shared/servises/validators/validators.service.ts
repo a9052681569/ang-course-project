@@ -3,14 +3,12 @@ import { ValidationErrors } from '@angular/forms';
 import { Observable, of, pipe, timer } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, delay, debounceTime, switchMap } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class ValidatorsService {
-  private checkUsername(value: string): Observable<ValidationErrors | null> {
-    return localStorage.getItem(`${value}.name`) === null ? of(null) : of({occupiedname: 'There is alredy user with that name'});
-  }
 
-  public constructor(private http: HttpClient) {}
+  public constructor(private auth: AuthService) {}
 
   public equalValidator(value: {password: string, confirmpassword: string}): ValidationErrors | null {
     const {password, confirmpassword} = value;
@@ -23,16 +21,13 @@ export class ValidatorsService {
   }
 
   public uniqUsernameValidator(value: string): Observable<ValidationErrors | null> {
-    localStorage.setItem('andrew.name', 'andrew');
-    localStorage.setItem('andrew.password', 'bioware');
-
     if (!value) {
       return of(null);
     }
     return timer(500)
       .pipe(
         switchMap(() => {
-          return this.checkUsername(value)
+          return this.auth.checkUsername(value)
             .pipe(
               map((errObj: ValidationErrors) => errObj ? errObj : null)
             );

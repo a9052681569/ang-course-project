@@ -5,11 +5,12 @@ import { UserSettingsComponent } from './user-settings.component';
 import { PasswordComponent } from './password/password.component';
 import { InitialsComponent } from './initials/initials.component';
 import { AddressComponent } from './address/address.component';
+import { SwitcherComponent } from './initials/switcher/switcher.component';
 
 
 
 @NgModule({
-  declarations: [UserSettingsComponent, PasswordComponent, InitialsComponent, AddressComponent],
+  declarations: [UserSettingsComponent, PasswordComponent, InitialsComponent, AddressComponent, SwitcherComponent],
   imports: [
     SharedModule,
     UserSettingsRoutingModule

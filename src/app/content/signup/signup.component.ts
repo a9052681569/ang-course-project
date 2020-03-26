@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IRootState } from 'src/app/store';
+import { SignupPending } from 'src/app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-signup',
@@ -7,8 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent {
 
-  public signup(value: {username: string, email: string, password: string, confirmpassword: string}) {
-    console.log(value);
+  public constructor(private store: Store<IRootState>) {}
+
+  public signup(value: {
+    username: string,
+    email: string,
+    password: {password: string, confirmpassword: string}
+  }) {
+    const {password: passwordGroup, ...user} = value;
+    this.store.dispatch(new SignupPending({...user, password: passwordGroup.password}));
   }
 
 }

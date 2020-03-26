@@ -18,6 +18,7 @@ import { EqualValidatorDirective } from './directives/equal-validator.directive'
 import { UniqUsernameValidatorDirective } from './directives/uniq-username-validator.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthService } from './servises/auth/auth.service';
 
 export const modules: any[] = [
   CommonModule,
@@ -44,6 +45,6 @@ export const modules: any[] = [
   ],
   exports: [...modules, UsernameValidatorDirective, EqualValidatorDirective, UniqUsernameValidatorDirective],
   declarations: [UsernameValidatorDirective, EqualValidatorDirective, UniqUsernameValidatorDirective],
-  providers: [ValidatorsService]
+  providers: [ValidatorsService, AuthService]
 })
 export class SharedModule { }

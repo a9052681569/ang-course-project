@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-initials',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./initials.component.css']
 })
 export class InitialsComponent implements OnInit {
+  public initialsGroup: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) {
+    this.createForm();
+  }
+  private createForm() {
+    this.initialsGroup = this.formBuilder.group({
+      name: '',
+      surname: '',
+      male: [true]
+    });
+  }
 
   ngOnInit() {
   }
-
 }

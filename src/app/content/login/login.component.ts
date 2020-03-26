@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IRootState } from 'src/app/store';
+import { LoginPending } from 'src/app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -7,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent {
 
+  public constructor(private store: Store<IRootState>) {}
+
   public login(loginInfo: {username: string, password: string}) {
-    console.log(loginInfo);
+    this.store.dispatch(new LoginPending(loginInfo));
   }
 
 }
