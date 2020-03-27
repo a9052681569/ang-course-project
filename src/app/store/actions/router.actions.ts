@@ -23,3 +23,7 @@ export class Forward implements Action {
     public type: string = RouterActions.FORWARD;
 }
 
+export type RouterActionsType =
+ | Go
+ | Back
+ | Forward;

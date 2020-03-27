@@ -5,12 +5,13 @@ import { Go, RouterActions, Back, Forward } from '../actions/router.actions';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { tap } from 'rxjs/operators';
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class RouterEffects {
 
     @Effect({dispatch: false})
-    public navigate$: Observable<any> = this.actions$.pipe(
+    public navigate$: Observable<Action> = this.actions$.pipe(
             ofType(RouterActions.GO),
             tap((action: Go) => {
                 const {path, query: queryParams, extras} = action.payload;
@@ -18,14 +19,14 @@ export class RouterEffects {
             })
         );
     @Effect({dispatch: false})
-    public navigateBack$: Observable<any> = this.actions$.pipe(
+    public navigateBack$: Observable<Action> = this.actions$.pipe(
             ofType(RouterActions.BACK),
             tap((action: Back) => {
                 this.location.back();
             })
         );
     @Effect({dispatch: false})
-    public navigateForward$: Observable<any> = this.actions$.pipe(
+    public navigateForward$: Observable<Action> = this.actions$.pipe(
             ofType(RouterActions.FORWARD),
             tap((action: Forward) => {
                 this.location.forward();

@@ -10,7 +10,6 @@ export interface IAddress {
 export interface IUser {
     name: string;
     surname: string;
-    accessToken: string;
     createdAt: Date;
     email: string;
     username: string;
@@ -23,7 +22,6 @@ export interface IUser {
 export const initialState: IUser = {
     name: '',
     surname: '',
-    accessToken: '',
     createdAt: new Date(),
     email: '',
     username: '',

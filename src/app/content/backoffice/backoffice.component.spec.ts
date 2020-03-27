@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackofficeComponent } from './backoffice.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 describe('BackofficeComponent', () => {
   let component: BackofficeComponent;
@@ -8,7 +14,13 @@ describe('BackofficeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BackofficeComponent ]
+      declarations: [ BackofficeComponent, HeaderComponent, SidebarComponent ],
+      imports: [
+        SharedModule,
+        NoopAnimationsModule,
+        RouterTestingModule
+      ],
+      providers: [provideMockStore({initialState: {}})]
     })
     .compileComponents();
   }));

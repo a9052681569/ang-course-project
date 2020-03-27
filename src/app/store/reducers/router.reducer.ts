@@ -1,5 +1,6 @@
 import { Params, NavigationExtras, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { RouterStateSerializer } from '@ngrx/router-store';
+import { RouterStateSerializer, RouterReducerState, routerReducer } from '@ngrx/router-store';
+import { RouterActionsType } from '../actions/router.actions';
 
 export interface IRouterStateUrl {
     url: string;
@@ -26,4 +27,11 @@ export class CustomRouterSerializer implements RouterStateSerializer<IRouterStat
         const {params} = state;
         return {url, params, queryParams};
     }
+}
+
+export function customRouterReducer(
+    state: RouterReducerState<IRouterStateUrl>,
+    action: RouterActionsType
+    ): RouterReducerState<IRouterStateUrl> {
+    return routerReducer(state, action);
 }

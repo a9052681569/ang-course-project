@@ -1,12 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 
 import { ValidatorsService } from './validators.service';
+import { AuthService } from '../auth/auth.service';
+import { ValidationErrors } from '@angular/forms';
 
 describe('ValidatorsService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => TestBed.configureTestingModule({
+    providers: [AuthService, ValidatorsService]
+  }));
 
-  it('should be created', () => {
-    const service: ValidatorsService = TestBed.get(ValidatorsService);
-    expect(service).toBeTruthy();
-  });
+  it('test uniqUsernameValidator', inject([ValidatorsService], (validatorsService: ValidatorsService) => {
+    validatorsService.uniqUsernameValidator('andrew').subscribe((err: ValidationErrors | null) => {
+      expect(err).toEqual(null);
+    });
+  }));
 });

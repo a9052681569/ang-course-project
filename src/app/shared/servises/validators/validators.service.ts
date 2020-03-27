@@ -8,7 +8,9 @@ import { AuthService } from '../auth/auth.service';
 @Injectable()
 export class ValidatorsService {
 
-  public constructor(private auth: AuthService) {}
+  private checkUsername(username: string): Observable<ValidationErrors | null> {
+    return localStorage.getItem(username) === null ? of(null) : of({occupiedname: 'There is alredy user with that name'});
+  }
 
   public equalValidator(value: {password: string, confirmpassword: string}): ValidationErrors | null {
     const {password, confirmpassword} = value;
@@ -27,7 +29,7 @@ export class ValidatorsService {
     return timer(500)
       .pipe(
         switchMap(() => {
-          return this.auth.checkUsername(value)
+          return this.checkUsername(value)
             .pipe(
               map((errObj: ValidationErrors) => errObj ? errObj : null)
             );

@@ -1,10 +1,10 @@
 import { IAuthState, authReducer } from './reducers/auth.reducer';
 import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
-import { RouterStateSerializer, RouterReducerState, routerReducer } from '@ngrx/router-store';
+import { RouterReducerState, routerReducer } from '@ngrx/router-store';
 import { AuthActionsType, AuthActions } from './actions/auth.actions';
-import { RouterStateSnapshot, ActivatedRouteSnapshot, Params, NavigationExtras } from '@angular/router';
+
 import { IUser, userReducer } from './reducers/user.reducer';
-import { IRouterStateUrl } from './reducers/router.reducer';
+import { IRouterStateUrl, customRouterReducer } from './reducers/router.reducer';
 
 export interface IRootState {
     auth: IAuthState;
@@ -15,12 +15,11 @@ export interface IRootState {
 export const reducer: ActionReducerMap<IRootState> = {
     auth: authReducer,
     user: userReducer,
-    router: routerReducer
+    router: customRouterReducer
 };
 
 
 export function logoutAndClearState(red: ActionReducer<IRootState>): ActionReducer<IRootState> {
-
     return (state: IRootState, action: AuthActionsType): IRootState => {
         switch (action.type) {
             case AuthActions.LOGOUT_SUCCESS: {
