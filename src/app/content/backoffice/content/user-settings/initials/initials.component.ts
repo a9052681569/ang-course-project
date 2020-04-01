@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { IRootState } from 'src/app/store';
+import { PatchUserPending } from 'src/app/store/actions/user.actions';
+import { IUser } from 'src/app/store/reducers/user.reducer';
 
 @Component({
   selector: 'app-initials',
@@ -9,17 +13,33 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class InitialsComponent implements OnInit {
   public initialsGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store<IRootState>
+    ) {
     this.createForm();
   }
   private createForm() {
     this.initialsGroup = this.formBuilder.group({
       name: '',
       surname: '',
-      male: [true]
+      email: '',
+      gender: [true]
     });
   }
 
-  ngOnInit() {
+  public submit() {
+    this.store.dispatch(new PatchUserPending(this.initialsGroup.value));
+  }
+
+  public ngOnInit() {
+    this.store.select('user').subscribe(({name, surname, email, gender}: IUser) => {
+      this.initialsGroup.patchValue({
+        name,
+        surname,
+        email,
+        gender
+      });
+    });
   }
 }

@@ -1,5 +1,26 @@
-<div fxLayout='row' fxLayoutAlign='space-evenly stretch'>
-    <app-initials></app-initials>
-    <app-password></app-password>
-</div>
-<app-address></app-address>
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Information
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-initials></app-initials>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Password
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-password></app-password>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Address
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-address></app-address>
+    </mat-expansion-panel>
+</mat-accordion>

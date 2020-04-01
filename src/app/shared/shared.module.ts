@@ -9,7 +9,8 @@ import { MatButtonModule,
   MatToolbarModule,
   MatBadgeModule,
   MatMenuModule,
-  MatCardModule
+  MatCardModule,
+  MatExpansionModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
@@ -35,7 +36,8 @@ export const modules: any[] = [
   FormsModule,
   HttpClientModule,
   FlexLayoutModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  MatExpansionModule
 ];
 
 @NgModule({
