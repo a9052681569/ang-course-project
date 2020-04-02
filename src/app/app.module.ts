@@ -15,6 +15,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { effects } from './store/effects';
 import { AuthService } from './shared/servises/auth/auth.service';
 import { CustomRouterSerializer } from './store/reducers/router.reducer';
+import { SearchService } from './shared/servises/search/search.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { CustomRouterSerializer } from './store/reducers/router.reducer';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     StoreModule.forRoot(reducer, {metaReducers}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({serializer: CustomRouterSerializer}),
@@ -32,7 +35,8 @@ import { CustomRouterSerializer } from './store/reducers/router.reducer';
   providers: [
     AuthGuard,
     CustomPreloadService,
-    AuthService
+    AuthService,
+    SearchService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,21 @@
+.repo-card__avatar {
+    width: 272px;
+    height: 272px;
+}
+
+.repo-card__stars {
+    margin-right: 10px;
+}
+mat-card-content {
+    overflow: hidden;
+    height: 50px;
+}
+
+mat-card-header {
+    height: 50px;
+    overflow: hidden;
+}
+mat-card-actions {
+    overflow: hidden;
+    height: 20px;
+}

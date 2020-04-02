@@ -1,8 +1,8 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="header">
     <button (click)='drawer.toggle()' mat-button aria-label="Example icon-button with a heart icon">
         <mat-icon>view_headline</mat-icon>
     </button>
-    <h3 [ngStyle]="headerStyles">Unicorns Board</h3>
+    <h3 [ngStyle]="headerStyles" [routerLink]='["/"]' class="header__title">Unicorns Board</h3>
     <span class="fill-space"></span>
     <button mat-icon-button [routerLink]='["events"]'>
         <mat-icon [matBadge]='2' [matBadgeHidden]='false' matBadgeColor='warn'>

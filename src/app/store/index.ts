@@ -5,17 +5,20 @@ import { AuthActionsType, AuthActions } from './actions/auth.actions';
 
 import { IUser, userReducer } from './reducers/user.reducer';
 import { IRouterStateUrl, customRouterReducer } from './reducers/router.reducer';
+import { ISearchState, searchReducer } from './reducers/search.reducer';
 
 export interface IRootState {
     auth: IAuthState;
     user: IUser;
     router: RouterReducerState<IRouterStateUrl>;
+    search: ISearchState;
 }
 
 export const reducer: ActionReducerMap<IRootState> = {
     auth: authReducer,
     user: userReducer,
-    router: customRouterReducer
+    router: customRouterReducer,
+    search: searchReducer
 };
 
 

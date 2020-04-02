@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container backdropClick>
     <mat-sidenav #drawer mode='side'>
         <mat-list>
             <mat-list-item [routerLink]='["dashboard"]'>
@@ -9,5 +9,8 @@
             </mat-list-item>
         </mat-list>
     </mat-sidenav>
-    <ng-content></ng-content>
+    <mat-sidenav-content (click)='drawer.close()'>
+        <ng-content></ng-content>
+    </mat-sidenav-content>
+    
 </mat-sidenav-container>

@@ -5,8 +5,8 @@ import { CustomPreloadService } from './custom-preload.service';
 
 
 const routes: Routes = [
-  { path: 'login', loadChildren: './content/login/login.module#LoginModule', canActivate: [AuthGuard] },
-  { path: 'signup', loadChildren: './content/signup/signup.module#SignupModule', canActivate: [AuthGuard] },
+  { path: 'login', loadChildren: './content/login/login.module#LoginModule' },
+  { path: 'signup', loadChildren: './content/signup/signup.module#SignupModule' },
   { path: 'backoffice', loadChildren: './content/backoffice/backoffice.module#BackofficeModule', canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'backoffice' },
 ];

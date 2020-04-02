@@ -10,16 +10,20 @@ import { MatButtonModule,
   MatBadgeModule,
   MatMenuModule,
   MatCardModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatGridListModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
 import { ValidatorsService } from './servises/validators/validators.service';
 import { EqualValidatorDirective } from './directives/equal-validator.directive';
 import { UniqUsernameValidatorDirective } from './directives/uniq-username-validator.directive';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './servises/auth/auth.service';
+import { SearchService } from './servises/search/search.service';
+import { UsersService } from './servises/users/users.service';
+import { SortByStarsPipe } from '../pipes/sort-by-stars/sort-by-stars.pipe';
 
 export const modules: any[] = [
   CommonModule,
@@ -42,11 +46,10 @@ export const modules: any[] = [
 
 @NgModule({
   imports: [
-    CommonModule,
     modules
   ],
-  exports: [...modules, UsernameValidatorDirective, EqualValidatorDirective, UniqUsernameValidatorDirective],
-  declarations: [UsernameValidatorDirective, EqualValidatorDirective, UniqUsernameValidatorDirective],
-  providers: [ValidatorsService, AuthService]
+  exports: [...modules, UsernameValidatorDirective, EqualValidatorDirective, UniqUsernameValidatorDirective, SortByStarsPipe],
+  declarations: [UsernameValidatorDirective, EqualValidatorDirective, UniqUsernameValidatorDirective, SortByStarsPipe],
+  providers: [ValidatorsService, AuthService, UsersService, SearchService, HttpClient]
 })
 export class SharedModule { }

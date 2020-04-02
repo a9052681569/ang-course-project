@@ -1,12 +1,22 @@
-mat-sidenav-container {
-    height: calc(100% - 64px);
+mat-sidenav-container, mat-sidenav {
+    padding-top: 64px;
+    height: 100%;
 }
+mat-sidenav-container {
+    position: relative;
+}
+mat-sidenav {
+    z-index: 10;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,.3);
+}
+
 mat-container {
     width: 200px;
 }
-mat-sidenav-content {
-    padding: 10px;
-}
 mat-list-item {
     cursor: pointer;
+}
+mat-sidenav-content {
+    margin-left: 0 !important;
+    padding: 2%;
 }
