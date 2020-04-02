@@ -1,0 +1,13 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>{{repo.name}}</mat-card-title>
+    </mat-card-header>
+    <img class="repo-card__avatar" mat-card-image [src]='repo?.owner?.avatar_url' alt='author avatar'>
+    <mat-card-content>
+        <p>{{repo.description}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <span class='repo-card__stars'><span class='bold-text'>Stars:&#8194;</span>{{repo.stargazers_count}}</span>
+        <span *ngIf='repo.language' class='repo-card__language'><span class='bold-text'>Language:&#8194;</span>{{repo.language}}</span>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,17 @@
+<div class="search">
+    <form [formGroup]='searchForm'>
+        <mat-form-field class="full-width">
+            <mat-label>Введи запрос и найдешь репозитории на gh</mat-label>
+            <input matInput formControlName='request'>
+            <mat-hint *ngIf='(state$ | async).noticeMessage'>{{(state$ | async).noticeMessage}}</mat-hint>
+        </mat-form-field>
+    </form>
+
+    <div @opacityChangeAnimation *ngIf='(state$ | async).isLoading' class='preloader__container'>
+        <div class='preloader'></div>
+    </div>
+    
+    <div class='result-container'>
+        <app-repo-card @opacityChangeAnimation *ngFor='let repo of (state$ | async).items | sortByStars' [repo]='repo'></app-repo-card>
+    </div>
+</div>

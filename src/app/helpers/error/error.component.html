@@ -1,0 +1,3 @@
+<mat-error *ngIf='control.errors'>
+    <span *ngFor='let err of control.errors | keyvalue'>{{err.key === 'required' ? err.key : err.value}}</span>
+</mat-error>
