@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IEvent } from 'src/app/interfaces/i-event';
+import { IEvent } from 'src/app/store/reducers/user.reducer';
+
 
 @Pipe({
   name: 'eventsFilter'

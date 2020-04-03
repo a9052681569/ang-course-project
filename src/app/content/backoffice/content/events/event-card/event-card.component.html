@@ -1,0 +1,3 @@
+<div class="event-card">
+    <div class="event-card__colomn" *ngFor='let val of event | keyvalue'>{{val.key === 'date' ? (val.value | date:'short') : val.value}}</div>
+</div>

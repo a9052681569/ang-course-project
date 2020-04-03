@@ -6,6 +6,10 @@ export interface IAddress {
     state: string;
     zip: string;
 }
+export interface IEvent {
+    text: string;
+    date: Date;
+}
 
 export interface IUser {
     name: string;
@@ -17,6 +21,7 @@ export interface IUser {
     address?: IAddress[];
     gender: boolean;
     password: string;
+    events: IEvent[];
 }
 
 export const initialState: IUser = {
@@ -28,12 +33,15 @@ export const initialState: IUser = {
     id: '',
     address: [],
     gender: false,
-    password: ''
+    password: '',
+    events: [{text: 'прпмиве', date: new Date()},
+     {text: 'sdafsadf', date: new Date()}, {text: 'xzfsdfgccxc', date: new Date()}]
 };
 
 export function userReducer(state: IUser = initialState, action: UserActionsType): IUser {
     switch (action.type) {
         case UserActions.SET_USER: {
+            localStorage.setItem(action.payload.username, JSON.stringify({...state, ...action.payload}));
             return {
                 ...state,
                 ...action.payload
@@ -49,6 +57,21 @@ export function userReducer(state: IUser = initialState, action: UserActionsType
         case UserActions.PATCH_USER_ERROR: {
             alert('Change failed');
             return state;
+        }
+        case UserActions.ADD_MESSAGE_SUCCESS: {
+            return {...state, events: [...state.events, action.payload]};
+        }
+        case UserActions.DELETE_MESSAGE_SUCCESS: {
+            const updatedEvents = state.events.slice().reduce((acc, item, index) => {
+                if (index !== action.payload) {
+                    acc.push(item);
+                }
+                return acc;
+            }, []);
+            return {...state, events: updatedEvents};
+        }
+        case UserActions.CLEAR_MESSAGES_SUCCESS: {
+            return {...state, events: []};
         }
         default: {
             return state;

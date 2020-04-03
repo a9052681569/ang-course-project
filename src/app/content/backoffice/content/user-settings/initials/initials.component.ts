@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { IRootState } from 'src/app/store';
-import { PatchUserPending } from 'src/app/store/actions/user.actions';
+import { PatchUserPending, AddMessagePending } from 'src/app/store/actions/user.actions';
 import { IUser } from 'src/app/store/reducers/user.reducer';
 
 @Component({
@@ -30,6 +30,7 @@ export class InitialsComponent implements OnInit {
 
   public submit() {
     this.store.dispatch(new PatchUserPending(this.initialsGroup.value));
+    this.store.dispatch(new AddMessagePending({text: 'Вы изменили данные о себе', date: new Date()}));
   }
 
   public ngOnInit() {

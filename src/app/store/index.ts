@@ -1,6 +1,6 @@
 import { IAuthState, authReducer } from './reducers/auth.reducer';
 import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
-import { RouterReducerState, routerReducer } from '@ngrx/router-store';
+import { RouterReducerState } from '@ngrx/router-store';
 import { AuthActionsType, AuthActions } from './actions/auth.actions';
 
 import { IUser, userReducer } from './reducers/user.reducer';

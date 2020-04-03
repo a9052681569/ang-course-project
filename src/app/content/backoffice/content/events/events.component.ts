@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IEvent } from 'src/app/interfaces/i-event';
-import { events$ } from 'src/app/mock/data';
 import { softAppearAnimation } from 'src/app/animations/soft-appear/soft-appear.animation';
+import { Store } from '@ngrx/store';
+import { IRootState } from 'src/app/store';
+import { IUser } from 'src/app/store/reducers/user.reducer';
+import { DeleteMessagePending, ClearMessagesPending } from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-events',
@@ -12,14 +14,23 @@ import { softAppearAnimation } from 'src/app/animations/soft-appear/soft-appear.
 })
 export class EventsComponent implements OnInit {
   public searchText: string;
-  public events$: Observable<IEvent[]> = events$;
 
-  public search(e: KeyboardEvent) {
+  public search(e: KeyboardEvent): void {
     const inputElement: HTMLInputElement = e.target as HTMLInputElement;
     this.searchText = inputElement.value;
   }
-  constructor() { }
+  constructor( private store: Store<IRootState>) { }
 
+  public get user$(): Observable<IUser> {
+    return this.store.select('user');
+  }
+
+  public deleteEvent(index: number): void {
+    this.store.dispatch(new DeleteMessagePending(index));
+  }
+  public clear(): void {
+    this.store.dispatch(new ClearMessagesPending('sdf'));
+  }
   ngOnInit() {
   }
 

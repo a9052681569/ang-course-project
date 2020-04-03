@@ -1,8 +1,10 @@
-<mat-card class="example-card">
+<mat-card>
     <mat-card-header>
         <mat-card-title>{{repo.name}}</mat-card-title>
     </mat-card-header>
-    <img class="repo-card__avatar" mat-card-image [src]='repo?.owner?.avatar_url' alt='author avatar'>
+    <a [href]='repo.html_url' target="blank">
+        <img class="repo-card__avatar" mat-card-image [src]='repo?.owner?.avatar_url' alt='author avatar'>
+    </a>
     <mat-card-content>
         <p>{{repo.description}}</p>
     </mat-card-content>

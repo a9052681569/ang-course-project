@@ -4,6 +4,8 @@ import { StyleObject } from 'src/app/interfaces/style-object';
 import { IRootState } from 'src/app/store';
 import { Store } from '@ngrx/store';
 import { LogoutPending } from 'src/app/store/actions/auth.actions';
+import { Observable } from 'rxjs';
+import { IUser } from 'src/app/store/reducers/user.reducer';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +26,10 @@ export class HeaderComponent {
 
   public logout() {
     this.store.dispatch(new LogoutPending());
+  }
+
+  get user$(): Observable<IUser> {
+    return this.store.select('user');
   }
 
 }

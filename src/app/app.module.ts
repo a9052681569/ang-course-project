@@ -17,15 +17,6 @@ import { AuthService } from './shared/servises/auth/auth.service';
 import { CustomRouterSerializer } from './store/reducers/router.reducer';
 import { SearchService } from './shared/servises/search/search.service';
 import { HttpClientModule } from '@angular/common/http';
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-import { SortByStarsPipe } from './pipes/sort-by-stars/sort-by-stars.pipe';
-import { ErrorComponent } from './helpers/error/error.component';
-import { SharedModule } from './shared/shared.module';
->>>>>>> 1703a464a46c5b9bcefcb8e0e1b00b2bfe2dd78c
->>>>>>> 1cb548dcfec38f7932eaffeac18def134a07333c
 
 @NgModule({
   declarations: [

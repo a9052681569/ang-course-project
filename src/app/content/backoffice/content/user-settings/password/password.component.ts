@@ -4,7 +4,7 @@ import { ValidatorsService } from 'src/app/shared/servises/validators/validators
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IRootState } from 'src/app/store';
-import { PatchUserPending } from 'src/app/store/actions/user.actions';
+import { PatchUserPending, AddMessagePending } from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-password',
@@ -50,6 +50,7 @@ export class PasswordComponent implements OnInit {
   public submit() {
     const {value} = this.changePasswordGroup.get('newPassword').get('password');
     this.store.dispatch(new PatchUserPending({password: value}));
+    this.store.dispatch(new AddMessagePending({text: 'Вы изменили пароль', date: new Date()}));
     this.resetForm();
   }
 

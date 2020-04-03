@@ -1,10 +1,22 @@
-<mat-form-field>
-    <input matInput placeholder="Input" (input)='search($event)'>
+<div class="events-header">
+    <h3>Ваши действия</h3>
+    <button (click)='clear()' class="events-header__clear-button" mat-raised-button color='primary'>Очистить</button>
+</div>
+
+
+
+<mat-form-field class="full-width">
+    <mat-label>Поиск действий по названию</mat-label>
+    <input matInput placeholder="Введите название действия" (input)='search($event)'>
 </mat-form-field>
 
-<div *ngIf='(events$ | async | eventsFilter:searchText) as events; else loading'>
-    <div @softAppearAnimation *ngFor='let event of events'>{{event.text}}</div>
-</div>
+<mat-list *ngIf='((user$ | async).events | eventsFilter:searchText) as events; else loading'>
+    <mat-list-item @softAppearAnimation *ngFor='let event of events; index as i;'>
+        <app-event-card [event]='event'></app-event-card>
+        <mat-icon (click)='deleteEvent(i)'>delete</mat-icon>
+        <mat-divider></mat-divider>
+    </mat-list-item>
+</mat-list>
 
 <ng-template #loading>
     <span>Loading...</span>

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormArray, FormControl, AbstractControl } from 
 import { Store } from '@ngrx/store';
 import { IRootState } from 'src/app/store';
 import { IUser } from 'src/app/store/reducers/user.reducer';
-import { PatchUserPending } from 'src/app/store/actions/user.actions';
+import { PatchUserPending, AddMessagePending } from 'src/app/store/actions/user.actions';
 
 export interface IAddressGroup {
   street: string;
@@ -53,6 +53,7 @@ export class AddressComponent {
 
   public submit() {
     this.store.dispatch(new PatchUserPending({address: this.addressGroups.value}));
+    this.store.dispatch(new AddMessagePending({text: 'Вы изменили данные о своем адресе', date: new Date()}));
   }
 
   private getAddressFromStore() {

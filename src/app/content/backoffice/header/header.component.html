@@ -5,7 +5,7 @@
     <h3 [ngStyle]="headerStyles" [routerLink]='["/"]' class="header__title">Unicorns Board</h3>
     <span class="fill-space"></span>
     <button mat-icon-button [routerLink]='["events"]'>
-        <mat-icon [matBadge]='2' [matBadgeHidden]='false' matBadgeColor='warn'>
+        <mat-icon [matBadge]='(user$ | async).events.length' [matBadgeHidden]='false' matBadgeColor='warn'>
             notifications
         </mat-icon>
     </button>
