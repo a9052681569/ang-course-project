@@ -116,6 +116,8 @@ THE SOFTWARE.
 
 @angular/material/core
 
+@angular/material/divider
+
 @angular/material/expansion
 
 @angular/material/form-field
@@ -127,6 +129,8 @@ THE SOFTWARE.
 @angular/material/menu
 
 @angular/material/sidenav
+
+@angular/material/snack-bar
 
 @angular/material/toolbar
 
