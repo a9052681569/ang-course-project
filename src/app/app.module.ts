@@ -18,6 +18,7 @@ import { CustomRouterSerializer } from './store/reducers/router.reducer';
 import { SearchService } from './shared/servises/search/search.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material';
+import { UsersService } from './shared/servises/users/users.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MatSnackBarModule } from '@angular/material';
     AuthGuard,
     CustomPreloadService,
     AuthService,
-    SearchService
+    SearchService,
+    UsersService
   ],
   bootstrap: [AppComponent]
 })

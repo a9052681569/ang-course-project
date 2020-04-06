@@ -4,7 +4,7 @@ import { ValidatorsService } from 'src/app/shared/servises/validators/validators
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IRootState } from 'src/app/store';
-import { PatchUserPending, AddMessagePending } from 'src/app/store/actions/user.actions';
+import { PatchUserPending } from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-password',

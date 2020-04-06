@@ -96,6 +96,7 @@ export interface IRepository {
     watchers: number;
     default_branch: string;
     score: number;
+    isFavourite: boolean;
 }
 export interface ISearchResult {
     total_count: number;

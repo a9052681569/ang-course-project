@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 export enum SearchActions {
     SEARCH_PENDING = '[Search] SEARCH_PENDING',
     SEARCH_SUCCESS = '[Search] SEARCH_SUCCESS',
-    SEARCH_ERROR = '[Search] SEARCH_ERROR',
+    SEARCH_ERROR = '[Search] SEARCH_ERROR'
 }
 
 export class SearchPending implements Action {

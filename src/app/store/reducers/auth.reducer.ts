@@ -1,5 +1,4 @@
 import { AuthActionsType, AuthActions } from '../actions/auth.actions';
-import { MatSnackBar } from '@angular/material';
 
 export interface IAuthState {
     isLogged: boolean;

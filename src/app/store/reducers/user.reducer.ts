@@ -1,4 +1,5 @@
 import { UserActionsType, UserActions } from '../actions/user.actions';
+import { IRepository } from './search.reducer';
 
 export interface IAddress {
     street: string;
@@ -22,6 +23,7 @@ export interface IUser {
     gender: boolean;
     password: string;
     events: IEvent[];
+    favoriteRepos: IRepository[];
 }
 
 export const initialState: IUser = {
@@ -34,8 +36,8 @@ export const initialState: IUser = {
     address: [],
     gender: false,
     password: '',
-    events: [{text: 'прпмиве', date: new Date()},
-     {text: 'sdafsadf', date: new Date()}, {text: 'xzfsdfgccxc', date: new Date()}]
+    events: [],
+    favoriteRepos: []
 };
 
 export function userReducer(state: IUser = initialState, action: UserActionsType): IUser {
@@ -53,13 +55,10 @@ export function userReducer(state: IUser = initialState, action: UserActionsType
                 ...action.payload
             };
         }
-        case UserActions.PATCH_USER_ERROR: {
-            return state;
-        }
-        case UserActions.ADD_MESSAGE_SUCCESS: {
+        case UserActions.ADD_EVENT_MESSAGE_SUCCESS: {
             return {...state, events: [...state.events, action.payload]};
         }
-        case UserActions.DELETE_MESSAGE_SUCCESS: {
+        case UserActions.DELETE_EVENT_MESSAGE_PENDING: {
             const updatedEvents = state.events.slice().reduce((acc, item, index) => {
                 if (index !== action.payload) {
                     acc.push(item);
@@ -68,8 +67,20 @@ export function userReducer(state: IUser = initialState, action: UserActionsType
             }, []);
             return {...state, events: updatedEvents};
         }
-        case UserActions.CLEAR_MESSAGES_SUCCESS: {
+        case UserActions.CLEAR_EVENT_MESSAGES_SUCCESS: {
             return {...state, events: []};
+        }
+        case UserActions.ADD_TO_FAVOURITES_SUCCESS: {
+            return {...state, favoriteRepos: [...state.favoriteRepos, {...action.payload, isFavourite: true}]};
+        }
+        case UserActions.REMOVE_FROM_FAVOURITES_SUCCESS: {
+            const updatedItems = state.favoriteRepos.slice().reduce((acc, item) => {
+                if (item.id !== action.payload.id) {
+                    acc.push(item);
+                }
+                return acc;
+            }, []);
+            return {...state, favoriteRepos: updatedItems};
         }
         default: {
             return state;

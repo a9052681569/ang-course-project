@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 import { SearchPending } from 'src/app/store/actions/search.actions';
 import { opacityChangeAnimation } from 'src/app/animations/opacity-change/opacity-change.animation';
 import { debounceTime } from 'rxjs/operators';
-import { AddMessagePending } from 'src/app/store/actions/user.actions';
+import { AddEventMessagePending } from 'src/app/store/actions/user.actions';
+
 
 @Component({
   selector: 'app-search',
@@ -32,7 +33,7 @@ export class SearchComponent implements OnInit {
     this.searchForm.valueChanges.pipe(debounceTime(500)).subscribe(() => {
       const value = this.searchForm.get('request').value;
       this.store.dispatch(new SearchPending(value));
-      this.store.dispatch(new AddMessagePending({
+      this.store.dispatch(new AddEventMessagePending({
         text: `Вы запросили репозиторий с названием ${value}`,
         date: new Date()
       }));

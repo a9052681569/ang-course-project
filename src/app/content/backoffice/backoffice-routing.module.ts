@@ -11,7 +11,8 @@ const routes: Routes = [
     children: [
       { path: '', loadChildren: './content/dashboard/dashboard.module#DashboardModule'},
       { path: 'events', loadChildren: './content/events/events.module#EventsModule'},
-      { path: 'user', loadChildren: './content/user-settings/user-settings.module#UserSettingsModule'}
+      { path: 'user', loadChildren: './content/user-settings/user-settings.module#UserSettingsModule'},
+      { path: 'favourites', loadChildren: './content/favourites/favourites.module#FavouritesModule'}
     ]
   },
 ];
