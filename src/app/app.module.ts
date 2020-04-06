@@ -17,6 +17,7 @@ import { AuthService } from './shared/servises/auth/auth.service';
 import { CustomRouterSerializer } from './store/reducers/router.reducer';
 import { SearchService } from './shared/servises/search/search.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     StoreModule.forRoot(reducer, {metaReducers}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({serializer: CustomRouterSerializer}),
-    EffectsModule.forRoot(effects)
+    EffectsModule.forRoot(effects),
+    MatSnackBarModule
   ],
   providers: [
     AuthGuard,

@@ -50,7 +50,6 @@ export class PasswordComponent implements OnInit {
   public submit() {
     const {value} = this.changePasswordGroup.get('newPassword').get('password');
     this.store.dispatch(new PatchUserPending({password: value}));
-    this.store.dispatch(new AddMessagePending({text: 'Вы изменили пароль', date: new Date()}));
     this.resetForm();
   }
 

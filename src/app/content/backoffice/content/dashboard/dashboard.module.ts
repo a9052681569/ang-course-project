@@ -4,7 +4,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
 import { SearchComponent } from './search/search.component';
 import { RepoCardComponent } from './search/repo-card/repo-card.component';
-import { SortByStarsPipe } from 'src/app/pipes/sort-by-stars/sort-by-stars.pipe';
 
 
 

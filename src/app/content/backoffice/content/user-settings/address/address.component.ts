@@ -53,7 +53,6 @@ export class AddressComponent {
 
   public submit() {
     this.store.dispatch(new PatchUserPending({address: this.addressGroups.value}));
-    this.store.dispatch(new AddMessagePending({text: 'Вы изменили данные о своем адресе', date: new Date()}));
   }
 
   private getAddressFromStore() {

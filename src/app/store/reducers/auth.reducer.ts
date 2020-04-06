@@ -1,4 +1,5 @@
 import { AuthActionsType, AuthActions } from '../actions/auth.actions';
+import { MatSnackBar } from '@angular/material';
 
 export interface IAuthState {
     isLogged: boolean;
@@ -14,7 +15,6 @@ export function authReducer(state: IAuthState = initialState, action: AuthAction
             return {...state, isLogged: true};
         }
         case AuthActions.LOGIN_ERROR: {
-            alert('Login failed');
             return state;
         }
         case AuthActions.SIGNUP_SUCCESS: {

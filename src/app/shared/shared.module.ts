@@ -11,7 +11,8 @@ import { MatButtonModule,
   MatMenuModule,
   MatCardModule,
   MatExpansionModule,
-  MatGridListModule
+  MatGridListModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidatorDirective } from './directives/username-validator.directive';

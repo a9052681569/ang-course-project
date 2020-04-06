@@ -11,6 +11,7 @@ import { UserActions, PatchUserPending, PatchUserSuccess,
 
 import { Action } from '@ngrx/store';
 import { UsersService } from 'src/app/shared/servises/users/users.service';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class UserEffects {
@@ -18,14 +19,22 @@ export class UserEffects {
     public patch$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(UserActions.PATCH_USER_PENDING),
         switchMap((action: PatchUserPending) => {
+            const {name, password} = action.payload;
+            const notificationMessage = name ? 'изменили данные о себе' : password ? 'изменили пароль' : 'изменили адрес';
+
             return this.userService.patch(action.payload)
                 .pipe(
                     mergeMap((user: IUser) => {
+                        this.snackBar.open(`Вы успешно ${notificationMessage}`, '' , { duration: 2000 });
                         return [
-                            new PatchUserSuccess(user)
+                            new PatchUserSuccess(user),
+                            new AddMessagePending({text: `Вы ${notificationMessage}`, date: new Date()})
                         ];
                     }),
-                    catchError((err: Error) => of(new PatchUserError(err)))
+                    catchError((err: Error) => {
+                        this.snackBar.open('Change Failed', '' , { duration: 2000 });
+                        return of(new PatchUserError(err));
+                    })
                 );
         })
     ));
@@ -80,6 +89,7 @@ export class UserEffects {
 
     constructor(
         private actions$: Actions,
-        private userService: UsersService
+        private userService: UsersService,
+        private snackBar: MatSnackBar
     ) {}
 }

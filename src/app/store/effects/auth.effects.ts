@@ -9,6 +9,7 @@ import { IUser } from '../reducers/user.reducer';
 import { SetUser } from '../actions/user.actions';
 import { Go } from '../actions/router.actions';
 import { Action } from '@ngrx/store';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthEffects {
@@ -23,8 +24,10 @@ export class AuthEffects {
                     }),
                     mergeMap((user: IUser) => {
                         if (!user) {
+                            this.snackBar.open('Ошибка входа');
                             return [new LoginError(new Error())];
                         }
+                        this.snackBar.open('Успешно вошли');
                         return [
                             new LoginSuccess(user),
                             new SetUser(user),
@@ -45,12 +48,18 @@ export class AuthEffects {
                     switchMap((user: IUser) => {
                         return this.authService.tokenToLocalStorage(user);
                     }),
-                    mergeMap((user: IUser) => [
-                        new SignupSuccess(user),
-                        new SetUser(user),
-                        new Go({path: ['backoffice']})
-                    ]),
-                    catchError((err: Error) => of(new SignupError(err)))
+                    mergeMap((user: IUser) => {
+                        this.snackBar.open('Регистрация прошла успешно');
+                        return [
+                            new SignupSuccess(user),
+                            new SetUser(user),
+                            new Go({path: ['backoffice']})
+                        ];
+                    }),
+                    catchError((err: Error) => {
+                        this.snackBar.open('Ошибка регистрации, попробуйте еще раз');
+                        return of(new SignupError(err));
+                    })
                 );
         })
     ));
@@ -95,6 +104,7 @@ export class AuthEffects {
 
     constructor(
         private actions$: Actions,
-        private authService: AuthService
+        private authService: AuthService,
+        private snackBar: MatSnackBar
     ) {}
 }

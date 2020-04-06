@@ -48,14 +48,12 @@ export function userReducer(state: IUser = initialState, action: UserActionsType
             };
         }
         case UserActions.PATCH_USER_SUCCESS: {
-            alert('Change Successfully');
             return {
                 ...state,
                 ...action.payload
             };
         }
         case UserActions.PATCH_USER_ERROR: {
-            alert('Change failed');
             return state;
         }
         case UserActions.ADD_MESSAGE_SUCCESS: {

@@ -30,7 +30,6 @@ export class InitialsComponent implements OnInit {
 
   public submit() {
     this.store.dispatch(new PatchUserPending(this.initialsGroup.value));
-    this.store.dispatch(new AddMessagePending({text: 'Вы изменили данные о себе', date: new Date()}));
   }
 
   public ngOnInit() {

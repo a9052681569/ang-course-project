@@ -16,6 +16,9 @@ mat-container {
 mat-list-item {
     cursor: pointer;
 }
+mat-list-item:focus {
+    outline: none;
+}
 mat-sidenav-content {
     margin-left: 0 !important;
     padding: 2%;
