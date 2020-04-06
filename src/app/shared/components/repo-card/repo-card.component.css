@@ -12,10 +12,15 @@ mat-card-content {
 }
 
 mat-card-header {
+    display: flex;
+    justify-content: space-between;
     height: 50px;
     overflow: hidden;
 }
 mat-card-actions {
     overflow: hidden;
-    height: 20px;
+    height: 40px;
+}
+mat-icon {
+    cursor: pointer;
 }

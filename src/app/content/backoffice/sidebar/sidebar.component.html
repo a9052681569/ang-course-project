@@ -2,12 +2,16 @@
     <mat-sidenav #drawer mode='side'>
         <mat-list>
             <mat-list-item [routerLink]='["dashboard"]' (click)='drawer.close()'>
-                <mat-icon>dashboard</mat-icon>
-                <button mat-button>Доска</button>
+                <mat-icon>search</mat-icon>
+                <button mat-button>Поиск</button>
             </mat-list-item>
             <mat-list-item [routerLink]='["events"]' (click)='drawer.close()'>
                 <mat-icon>notifications_active</mat-icon>
                 <button mat-button>Список активностей</button>
+            </mat-list-item>
+            <mat-list-item [routerLink]='["favourites"]' (click)='drawer.close()'>
+                <mat-icon>star</mat-icon>
+                <button mat-button>Избранное</button>
             </mat-list-item>
         </mat-list>
     </mat-sidenav>

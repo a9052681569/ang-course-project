@@ -96,6 +96,7 @@ export interface IRepository {
     watchers: number;
     default_branch: string;
     score: number;
+    isFavourite: boolean;
 }
 export interface ISearchResult {
     total_count: number;
@@ -139,6 +140,24 @@ export function searchReducer(state: ISearchState = initialState, action: Search
         }
         case SearchActions.SEARCH_ERROR: {
             return {...initialState, noticeMessage: 'Произошла ошибка'};
+        }
+        case SearchActions.MAKE_FAVOURITE: {
+            const updatedItems = state.items.slice().map((item) => {
+                if (item.id === action.payload.id) {
+                    return {...item, isFavourite: true};
+                }
+                return item;
+            });
+            return {...state, items: [...updatedItems]};
+        }
+        case SearchActions.MAKE_UNFAVOURITE: {
+            const updatedItems = state.items.slice().map((item) => {
+                if (item.id === action.payload.id) {
+                    return {...item, isFavourite: false};
+                }
+                return item;
+            });
+            return {...state, items: [...updatedItems]};
         }
         default: {
             return state;

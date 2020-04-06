@@ -1,6 +1,10 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>{{repo.name}}</mat-card-title>
+        <mat-icon *ngIf='repo.isFavourite; else notFav' (click)='favoritesToggle()'>turned_in</mat-icon>
+        <ng-template #notFav>
+            <mat-icon (click)='favoritesToggle()'>turned_in_not</mat-icon>
+        </ng-template>
     </mat-card-header>
     <a [href]='repo.html_url' target="blank">
         <img class="repo-card__avatar" mat-card-image [src]='repo?.owner?.avatar_url' alt='author avatar'>

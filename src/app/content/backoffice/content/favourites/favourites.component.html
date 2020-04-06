@@ -1,0 +1,6 @@
+<div class='result-container' *ngIf='(user$ | async).favoriteRepos.length > 0; else noSaved'>
+    <app-repo-card @opacityChangeAnimation *ngFor='let repo of (user$ | async).favoriteRepos' [repo]='repo'></app-repo-card>
+</div>
+<ng-template #noSaved>
+    <p>нет сохраненных репозиториев</p>
+</ng-template>

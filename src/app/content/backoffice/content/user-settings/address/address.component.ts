@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, FormControl, AbstractControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { IRootState } from 'src/app/store';
 import { IUser } from 'src/app/store/reducers/user.reducer';
-import { PatchUserPending, AddMessagePending } from 'src/app/store/actions/user.actions';
+import { PatchUserPending } from 'src/app/store/actions/user.actions';
 
 export interface IAddressGroup {
   street: string;
