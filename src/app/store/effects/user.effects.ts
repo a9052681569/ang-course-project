@@ -25,8 +25,11 @@ import { PatchUserError,
             RemoveFromFavouritesSuccess,
             RemoveFromFavouritesError} from '../actions/user.actions';
 import { IRepository } from '../reducers/search.reducer';
+<<<<<<< HEAD
 import { MakeFavourite, MakeUnfavourite } from '../actions/search.actions';
 
+=======
+>>>>>>> f34434d8e4c0ef9b6cee9c9f5e077f199b012f0e
 
 @Injectable()
 export class UserEffects {
@@ -110,7 +113,10 @@ export class UserEffects {
                     mergeMap((repo: IRepository) => {
                         this.snackBar.open('Добавлено в избранное');
                         return [
+<<<<<<< HEAD
                             new MakeFavourite(repo),
+=======
+>>>>>>> f34434d8e4c0ef9b6cee9c9f5e077f199b012f0e
                             new AddToFavouritesSuccess(repo),
                             new AddEventMessagePending({text: `Вы добавили репозиторий в избранное`, date: new Date()})
                         ];
@@ -130,7 +136,10 @@ export class UserEffects {
                     mergeMap((repo: IRepository) => {
                         this.snackBar.open('Удалено из избранного');
                         return [
+<<<<<<< HEAD
                             new MakeUnfavourite(repo),
+=======
+>>>>>>> f34434d8e4c0ef9b6cee9c9f5e077f199b012f0e
                             new RemoveFromFavouritesSuccess(repo),
                             new AddEventMessagePending({text: `Вы удалили репозиторий из избранного`, date: new Date()})
                         ];
