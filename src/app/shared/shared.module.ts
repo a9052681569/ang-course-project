@@ -11,8 +11,7 @@ import { MatButtonModule,
   MatMenuModule,
   MatCardModule,
   MatExpansionModule,
-  MatGridListModule,
-  MatSnackBarModule
+  MatSpinner
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
@@ -26,7 +25,7 @@ import { SearchService } from './servises/search/search.service';
 import { UsersService } from './servises/users/users.service';
 import { SortByStarsPipe } from '../pipes/sort-by-stars/sort-by-stars.pipe';
 import { RepoCardComponent } from './components/repo-card/repo-card.component';
-import { IsFavouritePipe } from '../pipes/is-favourite/is-favourite.pipe';
+import { RepoFilterPipe } from '../pipes/repo-filter/repo-filter.pipe';
 
 export const modules: any[] = [
   CommonModule,
@@ -44,7 +43,7 @@ export const modules: any[] = [
   HttpClientModule,
   FlexLayoutModule,
   ReactiveFormsModule,
-  MatExpansionModule
+  MatExpansionModule,
 ];
 
 @NgModule({
@@ -53,9 +52,10 @@ export const modules: any[] = [
   ],
   exports: [...modules, UsernameValidatorDirective,
     EqualValidatorDirective, UniqUsernameValidatorDirective,
-     SortByStarsPipe, RepoCardComponent, IsFavouritePipe],
+     SortByStarsPipe, RepoCardComponent, RepoFilterPipe, MatSpinner],
   declarations: [UsernameValidatorDirective, EqualValidatorDirective,
-     UniqUsernameValidatorDirective, SortByStarsPipe, RepoCardComponent, IsFavouritePipe],
+     UniqUsernameValidatorDirective, SortByStarsPipe, RepoCardComponent, RepoFilterPipe,
+     MatSpinner ],
   providers: [ValidatorsService, AuthService, UsersService, SearchService, HttpClient]
 })
 export class SharedModule { }

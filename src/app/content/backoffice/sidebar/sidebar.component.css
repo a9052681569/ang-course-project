@@ -23,3 +23,7 @@ mat-sidenav-content {
     margin-left: 0 !important;
     padding: 2%;
 }
+button {
+    width: 100%;
+    text-align: start;
+}

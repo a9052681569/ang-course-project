@@ -6,9 +6,9 @@
             <mat-hint *ngIf='(state$ | async).noticeMessage'>{{(state$ | async).noticeMessage}}</mat-hint>
         </mat-form-field>
     </form>
-
-    <div @opacityChangeAnimation *ngIf='(state$ | async).isLoading' class='preloader__container'>
-        <div class='preloader'></div>
+    
+    <div *ngIf='(state$ | async).isLoading' class='preloader__container'>
+        <mat-spinner color='accent'></mat-spinner>
     </div>
     
     <div class='result-container'>

@@ -24,3 +24,7 @@ mat-card-actions {
 mat-icon {
     cursor: pointer;
 }
+
+mat-card:hover {
+    box-shadow: 0 0 5px grey;
+}

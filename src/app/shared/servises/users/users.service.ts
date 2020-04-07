@@ -25,7 +25,12 @@ export class UsersService {
 
   public addMessageToLocalStorage(event: IEvent): Observable<IEvent> {
     const actualUser = this.getActualUser();
+
+    actualUser.events.length > 30 ?
+    actualUser.events.splice(1).push(event)
+    :
     actualUser.events.push(event);
+
     localStorage.setItem(actualUser.username, JSON.stringify(actualUser));
     return of(event);
   }

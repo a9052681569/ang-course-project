@@ -5,7 +5,8 @@ import { switchMap, mergeMap, catchError } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 import { SearchActions, SearchPending, SearchSuccess, SearchError } from '../actions/search.actions';
 import { SearchService } from 'src/app/shared/servises/search/search.service';
-import { ISearchState } from '../reducers/search.reducer';
+import { ISearchState, ISearchResult } from '../reducers/search.reducer';
+import { AddEventMessagePending } from '../actions/user.actions';
 
 @Injectable()
 export class SearchEffects {
@@ -15,8 +16,12 @@ export class SearchEffects {
         switchMap((action: SearchPending) => {
             return this.searchService.sendRequest(action.payload)
                 .pipe(
+                    switchMap((res: ISearchResult) => {
+                        return this.searchService.handleResponse(res);
+                    }),
                     mergeMap((res: ISearchState) => {
                         return [
+                            new AddEventMessagePending(`Вы запросили репозиторий с названием ${action.payload}`),
                             new SearchSuccess(res)
                         ];
                     }),

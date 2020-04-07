@@ -18,9 +18,7 @@ export class PasswordComponent implements OnInit {
   constructor(
     private validatorService: ValidatorsService,
     private store: Store<IRootState>
-    ) {
-    this.createForm();
-  }
+    ) {}
   private createForm() {
     this.changePasswordGroup = new FormGroup({
       oldPass: new FormControl('', [Validators.required], [this.checkPassword.bind(this)]),
@@ -32,6 +30,7 @@ export class PasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createForm();
   }
   private equalValidator({value}: FormGroup): ValidationErrors | null {
     return this.validatorService.equalValidator(value);

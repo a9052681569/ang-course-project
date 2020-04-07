@@ -16,9 +16,7 @@ export class InitialsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<IRootState>
-    ) {
-    this.createForm();
-  }
+    ) {}
   private createForm() {
     this.initialsGroup = this.formBuilder.group({
       name: '',
@@ -33,6 +31,7 @@ export class InitialsComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.createForm();
     this.store.select('user').subscribe(({name, surname, email, gender}: IUser) => {
       this.initialsGroup.patchValue({
         name,

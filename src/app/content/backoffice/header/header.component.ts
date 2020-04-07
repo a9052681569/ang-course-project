@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { LogoutPending } from 'src/app/store/actions/auth.actions';
 import { Observable } from 'rxjs';
 import { IUser } from 'src/app/store/reducers/user.reducer';
+import { Back, Forward } from 'src/app/store/actions/router.actions';
 
 @Component({
   selector: 'app-header',
@@ -24,12 +25,20 @@ export class HeaderComponent {
     'font-size': '18px'
   };
 
-  public logout() {
+  public logout(): void {
     this.store.dispatch(new LogoutPending());
   }
 
   get user$(): Observable<IUser> {
     return this.store.select('user');
+  }
+
+  public previousPage(): void {
+    this.store.dispatch(new Back());
+  }
+
+  public nextPage(): void {
+    this.store.dispatch(new Forward());
   }
 
 }

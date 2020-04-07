@@ -1,23 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { IRootState } from 'src/app/store';
-import { IUser } from 'src/app/store/reducers/user.reducer';
+import { IUser, IAddress } from 'src/app/store/reducers/user.reducer';
 import { PatchUserPending } from 'src/app/store/actions/user.actions';
 
-export interface IAddressGroup {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-}
+
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.css']
 })
-export class AddressComponent {
-  public addressGroup: IAddressGroup = {
+export class AddressComponent implements OnInit {
+  public addressGroup: IAddress = {
     street: '',
     city: '',
     state: '',
@@ -28,7 +23,9 @@ export class AddressComponent {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<IRootState>
-    ) {
+    ) {}
+
+  ngOnInit() {
     this.createForm();
     this.getAddressFromStore();
   }
@@ -38,7 +35,7 @@ export class AddressComponent {
       address: this.formBuilder.array([])
     });
   }
-  public addAddress(group: IAddressGroup) {
+  public addAddress(group: IAddress) {
     this.addressGroups.push(
       this.formBuilder.group(group)
     );

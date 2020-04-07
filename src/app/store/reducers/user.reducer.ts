@@ -56,15 +56,14 @@ export function userReducer(state: IUser = initialState, action: UserActionsType
             };
         }
         case UserActions.ADD_EVENT_MESSAGE_SUCCESS: {
-            return {...state, events: [...state.events, action.payload]};
+            const updatedEvents = state.events.length > 30 ?
+            [...state.events.slice().splice(1), action.payload]
+            :
+            [...state.events, action.payload];
+            return {...state, events: updatedEvents};
         }
-        case UserActions.DELETE_EVENT_MESSAGE_PENDING: {
-            const updatedEvents = state.events.slice().reduce((acc, item, index) => {
-                if (index !== action.payload) {
-                    acc.push(item);
-                }
-                return acc;
-            }, []);
+        case UserActions.DELETE_EVENT_MESSAGE_SUCCESS: {
+            const updatedEvents = state.events.slice().filter((item, index) => index !== action.payload);
             return {...state, events: updatedEvents};
         }
         case UserActions.CLEAR_EVENT_MESSAGES_SUCCESS: {
@@ -74,12 +73,7 @@ export function userReducer(state: IUser = initialState, action: UserActionsType
             return {...state, favoriteRepos: [...state.favoriteRepos, {...action.payload, isFavourite: true}]};
         }
         case UserActions.REMOVE_FROM_FAVOURITES_SUCCESS: {
-            const updatedItems = state.favoriteRepos.slice().reduce((acc, item) => {
-                if (item.id !== action.payload.id) {
-                    acc.push(item);
-                }
-                return acc;
-            }, []);
+            const updatedItems = state.favoriteRepos.slice().filter(item => item.id !== action.payload.id);
             return {...state, favoriteRepos: updatedItems};
         }
         default: {

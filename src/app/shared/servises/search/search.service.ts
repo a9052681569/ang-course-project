@@ -13,32 +13,26 @@ export class SearchService {
 
   constructor(private http: HttpClient, private store: Store<IRootState>) {   }
 
-  public sendRequest(repoName: string): Observable<object | string> {
+  public sendRequest(repoName: string): Observable<ISearchResult | string> {
     // сервер ответит ошибкой если нет запроса, но логически для пользователя это не ошибка,
-    // поэтому возвращаем строку и обрабатываем этот случай в редьюсере
+    // поэтому возвращаем строку и обрабатываем этот случай
     return repoName.length > 0 ?
-      this.http.get(`https://api.github.com/search/repositories?q=${repoName}`).pipe(
-        distinctUntilChanged(),
-        take(1),
-        switchMap((res: ISearchResult) => {
-          return this.store.pipe(
-            select('user'),
-            distinctUntilChanged(),
-            take(1),
-            map((user: IUser) => {
-              res.items.forEach((searchItem) => {
-                user.favoriteRepos.forEach((userItem) => {
-                  if (searchItem.id === userItem.id) {
-                    searchItem.isFavourite = true;
-                  }
-                });
-              });
-              return res;
-            })
-          );
-        })
-      )
+      this.http.get<ISearchResult>(`https://api.github.com/search/repositories?q=${repoName}`)
       :
       of('строка');
+  }
+  public handleResponse(res: ISearchResult): Observable<ISearchState> {
+    if (typeof res === 'string') {
+      return of(res);
+    }
+    const actualUser: IUser = JSON.parse(localStorage.getItem(localStorage.getItem('token')));
+    res.items.forEach((searchItem) => {
+      actualUser.favoriteRepos.forEach((userItem) => {
+        if (searchItem.id === userItem.id) {
+          searchItem.isFavourite = true;
+        }
+      });
+    });
+    return of(res);
   }
 }

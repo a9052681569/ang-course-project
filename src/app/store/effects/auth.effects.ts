@@ -24,10 +24,10 @@ export class AuthEffects {
                     }),
                     mergeMap((user: IUser) => {
                         if (!user) {
-                            this.snackBar.open('Ошибка входа');
+                            this.snackBar.open('Ошибка входа', '' , { duration: 2000 });
                             return [new LoginError(new Error())];
                         }
-                        this.snackBar.open('Успешно вошли');
+                        this.snackBar.open('Успешно вошли', '' , { duration: 2000 });
                         return [
                             new LoginSuccess(user),
                             new SetUser(user),
