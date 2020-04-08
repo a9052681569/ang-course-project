@@ -27,6 +27,7 @@ import { UsersService } from './servises/users/users.service';
 import { SortByStarsPipe } from '../pipes/sort-by-stars/sort-by-stars.pipe';
 import { RepoCardComponent } from './components/repo-card/repo-card.component';
 import { RepoFilterPipe } from '../pipes/repo-filter/repo-filter.pipe';
+import { ValuesPipe } from '../pipes/values/values';
 
 export const modules: any[] = [
   CommonModule,
@@ -54,9 +55,9 @@ export const modules: any[] = [
   ],
   exports: [...modules, UsernameValidatorDirective,
     EqualValidatorDirective, UniqUsernameValidatorDirective,
-     SortByStarsPipe, RepoCardComponent, RepoFilterPipe],
+     SortByStarsPipe, RepoCardComponent, RepoFilterPipe, ValuesPipe],
   declarations: [UsernameValidatorDirective, EqualValidatorDirective,
-     UniqUsernameValidatorDirective, SortByStarsPipe, RepoCardComponent, RepoFilterPipe],
+     UniqUsernameValidatorDirective, SortByStarsPipe, RepoCardComponent, RepoFilterPipe, ValuesPipe],
   providers: [ValidatorsService, AuthService, UsersService, SearchService, HttpClient]
 })
 export class SharedModule { }

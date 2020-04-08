@@ -22,7 +22,7 @@ export interface IOwner {
 }
 
 export interface IRepository {
-    id: number;
+    id: string;
     node_id: string;
     name: string;
     full_name: string;

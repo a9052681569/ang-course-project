@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { IUser, IEvent } from 'src/app/store/reducers/user.reducer';
+import { IUser, IEvent, favouriteAdapter } from 'src/app/store/reducers/user.reducer';
 import { IRepository } from 'src/app/store/reducers/search.reducer';
 
 @Injectable()
@@ -59,7 +59,7 @@ export class UsersService {
 
   public addRepoToLocalStorage(repo: IRepository): Observable<IRepository> {
     const actualUser = this.getActualUser();
-    actualUser.favoriteRepos.push({...repo, isFavourite: true});
+    actualUser.favoriteRepos = favouriteAdapter.addOne({...repo, isFavourite: true}, actualUser.favoriteRepos);
     localStorage.setItem(actualUser.username, JSON.stringify(actualUser));
     return of(repo);
   }
@@ -67,13 +67,7 @@ export class UsersService {
 
   public deleteRepoFromLocalStorage(repo: IRepository): Observable<IRepository> {
     const actualUser = this.getActualUser();
-    const updatedItems = actualUser.favoriteRepos.reduce((acc, item) => {
-        if (item.id !== repo.id) {
-            acc.push(item);
-        }
-        return acc;
-    }, []);
-    actualUser.favoriteRepos = updatedItems;
+    actualUser.favoriteRepos = favouriteAdapter.removeOne(repo.id, actualUser.favoriteRepos);
     localStorage.setItem(actualUser.username, JSON.stringify(actualUser));
     return of(repo);
   }

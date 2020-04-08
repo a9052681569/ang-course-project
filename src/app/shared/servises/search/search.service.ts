@@ -20,13 +20,13 @@ export class SearchService {
   }
   public handleResponse(res: ISearchResult): Observable<ISearchState> {
     const actualUser: IUser = JSON.parse(localStorage.getItem(localStorage.getItem('token')));
-    res.items.forEach((searchItem) => {
-      actualUser.favoriteRepos.forEach((userItem) => {
-        if (searchItem.id === userItem.id) {
-          searchItem.isFavourite = true;
-        }
-      });
-    });
+    // res.items.forEach((searchItem) => {
+    //   actualUser.favoriteRepos.forEach((userItem) => {
+    //     if (searchItem.id === userItem.id) {
+    //       searchItem.isFavourite = true;
+    //     }
+    //   });
+    // });
     return of(res);
   }
 }

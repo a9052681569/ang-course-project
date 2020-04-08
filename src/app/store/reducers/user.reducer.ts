@@ -1,5 +1,6 @@
 import { UserActionsType, UserActions } from '../actions/user.actions';
 import { IRepository } from './search.reducer';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 export interface IAddress {
     street: string;
@@ -12,6 +13,13 @@ export interface IEvent {
     date: Date;
 }
 
+export interface IFavouriteState extends EntityState<IRepository> {}
+
+export const favouriteAdapter: EntityAdapter<IRepository> = createEntityAdapter<IRepository>();
+
+export const favoriteInitialState: IFavouriteState = favouriteAdapter.getInitialState();
+
+
 export interface IUser {
     name: string;
     surname: string;
@@ -23,7 +31,7 @@ export interface IUser {
     gender: boolean;
     password: string;
     events: IEvent[];
-    favoriteRepos: IRepository[];
+    favoriteRepos: IFavouriteState;
 }
 
 export const initialState: IUser = {
@@ -37,7 +45,7 @@ export const initialState: IUser = {
     gender: false,
     password: '',
     events: [],
-    favoriteRepos: []
+    favoriteRepos: favoriteInitialState
 };
 
 export function userReducer(state: IUser = initialState, action: UserActionsType): IUser {
@@ -70,11 +78,16 @@ export function userReducer(state: IUser = initialState, action: UserActionsType
             return {...state, events: []};
         }
         case UserActions.ADD_TO_FAVOURITES_SUCCESS: {
-            return {...state, favoriteRepos: [...state.favoriteRepos, {...action.payload, isFavourite: true}]};
+            return {
+                ...state,
+                favoriteRepos: favouriteAdapter.addOne({...action.payload, isFavourite: true}, state.favoriteRepos)
+            };
         }
         case UserActions.REMOVE_FROM_FAVOURITES_SUCCESS: {
-            const updatedItems = state.favoriteRepos.slice().filter(item => item.id !== action.payload.id);
-            return {...state, favoriteRepos: updatedItems};
+            return {
+                ...state,
+                favoriteRepos: favouriteAdapter.removeOne(action.payload.id, state.favoriteRepos)
+            };
         }
         default: {
             return state;
