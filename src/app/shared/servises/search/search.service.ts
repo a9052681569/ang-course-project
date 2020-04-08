@@ -13,18 +13,12 @@ export class SearchService {
 
   constructor(private http: HttpClient, private store: Store<IRootState>) {   }
 
-  public sendRequest(repoName: string): Observable<ISearchResult | string> {
-    // сервер ответит ошибкой если нет запроса, но логически для пользователя это не ошибка,
-    // поэтому возвращаем строку и обрабатываем этот случай
-    return repoName.length > 0 ?
-      this.http.get<ISearchResult>(`https://api.github.com/search/repositories?q=${repoName}`)
-      :
-      of('строка');
+  public sendRequest(repoName: string): Observable<ISearchResult> {
+    // сервер ответит ошибкой если название будет пустой строкой, но логически для пользователя это не ошибка,
+    // поэтому возвращаем null и обрабатываем этот случай
+    return this.http.get<ISearchResult>(`https://api.github.com/search/repositories?q=${repoName}`);
   }
   public handleResponse(res: ISearchResult): Observable<ISearchState> {
-    if (typeof res === 'string') {
-      return of(res);
-    }
     const actualUser: IUser = JSON.parse(localStorage.getItem(localStorage.getItem('token')));
     res.items.forEach((searchItem) => {
       actualUser.favoriteRepos.forEach((userItem) => {

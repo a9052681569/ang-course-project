@@ -125,18 +125,14 @@ export function searchReducer(state: ISearchState = initialState, action: Search
         case SearchActions.SEARCH_PENDING: {
             return {...state, isLoading: true};
         }
+        case SearchActions.SEARCH_EMPTY: {
+            return {...initialState, noticeMessage: 'Введите запрос'};
+        }
         case SearchActions.SEARCH_SUCCESS: {
-            if (typeof action.payload === 'string') {
-                return {...initialState, noticeMessage: 'Введите запрос'};
-            }
             if (action.payload.total_count === 0) {
                 return {...initialState, noticeMessage: 'Нет репозитория с таким названием'};
             }
-            return {
-                ...initialState,
-                ...action.payload,
-                isLoading: false
-            };
+            return {...initialState, ...action.payload};
         }
         case SearchActions.SEARCH_ERROR: {
             return {...initialState, noticeMessage: 'Произошла ошибка'};

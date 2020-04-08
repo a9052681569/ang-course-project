@@ -11,7 +11,8 @@ import { MatButtonModule,
   MatMenuModule,
   MatCardModule,
   MatExpansionModule,
-  MatSpinner
+  MatSpinner,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
@@ -44,6 +45,7 @@ export const modules: any[] = [
   FlexLayoutModule,
   ReactiveFormsModule,
   MatExpansionModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
@@ -52,10 +54,9 @@ export const modules: any[] = [
   ],
   exports: [...modules, UsernameValidatorDirective,
     EqualValidatorDirective, UniqUsernameValidatorDirective,
-     SortByStarsPipe, RepoCardComponent, RepoFilterPipe, MatSpinner],
+     SortByStarsPipe, RepoCardComponent, RepoFilterPipe],
   declarations: [UsernameValidatorDirective, EqualValidatorDirective,
-     UniqUsernameValidatorDirective, SortByStarsPipe, RepoCardComponent, RepoFilterPipe,
-     MatSpinner ],
+     UniqUsernameValidatorDirective, SortByStarsPipe, RepoCardComponent, RepoFilterPipe],
   providers: [ValidatorsService, AuthService, UsersService, SearchService, HttpClient]
 })
 export class SharedModule { }
