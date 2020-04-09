@@ -4,6 +4,7 @@ import { IRootState } from 'src/app/store';
 import { Observable } from 'rxjs';
 import { IUser } from 'src/app/store/reducers/user.reducer';
 import { favouriteOnLeaveAnimation } from 'src/app/animations/favourite-on-leave/favourite-on-leave';
+import { IFavouriteState } from 'src/app/store/reducers/favourites.reducer';
 
 
 @Component({
@@ -18,8 +19,8 @@ export class FavouritesComponent  {
 
   constructor(private store: Store<IRootState>) {}
 
-  public get user$(): Observable<IUser> {
-    return this.store.select('user');
+  public get favourites$(): Observable<IFavouriteState> {
+    return this.store.select('favourites');
   }
 
 }

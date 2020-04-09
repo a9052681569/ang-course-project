@@ -20,16 +20,6 @@ export enum UserActions {
     CLEAR_EVENT_MESSAGES_PENDING = '[User] CLEAR_MESSAGES_PENDING',
     CLEAR_EVENT_MESSAGES_SUCCESS = '[User] CLEAR_MESSAGES_SUCCESS',
     CLEAR_EVENT_MESSAGES_ERROR = '[User] CLEAR_MESSAGES_ERROR',
-
-
-
-    ADD_TO_FAVOURITES_PENDING = '[User] ADD_TO_FAVOURITES_PENDING',
-    ADD_TO_FAVOURITES_SUCCESS = '[User] ADD_TO_FAVOURITES_SUCCESS',
-    ADD_TO_FAVOURITES_ERROR = '[User] ADD_TO_FAVOURITES_ERROR',
-
-    REMOVE_FROM_FAVOURITES_PENDING = '[User] REMOVE_FROM_FAVOURITES_PENDING',
-    REMOVE_FROM_FAVOURITES_SUCCESS = '[User] REMOVE_FROM_FAVOURITES_SUCCESS',
-    REMOVE_FROM_FAVOURITES_ERROR = '[User] REMOVE_FROM_FAVOURITES_ERROR',
 }
 
 export class SetUser implements Action {
@@ -103,40 +93,6 @@ export class ClearEventMessagesError implements Action {
     public constructor(public payload: any) {}
 }
 
-
-
-
-export class AddToFavouritesPending implements Action {
-    public type: string = UserActions.ADD_TO_FAVOURITES_PENDING;
-
-    public constructor(public payload: any) {}
-}
-export class AddToFavouritesSuccess implements Action {
-    public type: string = UserActions.ADD_TO_FAVOURITES_SUCCESS;
-
-    public constructor(public payload: any) {}
-}
-export class AddToFavouritesError implements Action {
-    public type: string = UserActions.ADD_TO_FAVOURITES_ERROR;
-
-    public constructor(public payload: any) {}
-}
-export class RemoveFromFavouritesPending implements Action {
-    public type: string = UserActions.REMOVE_FROM_FAVOURITES_PENDING;
-
-    public constructor(public payload: any) {}
-}
-export class RemoveFromFavouritesSuccess implements Action {
-    public type: string = UserActions.REMOVE_FROM_FAVOURITES_SUCCESS;
-
-    public constructor(public payload: any) {}
-}
-export class RemoveFromFavouritesError implements Action {
-    public type: string = UserActions.REMOVE_FROM_FAVOURITES_ERROR;
-
-    public constructor(public payload: any) {}
-}
-
 export type UserActionsType =
     | SetUser
     | PatchUserPending
@@ -150,10 +106,4 @@ export type UserActionsType =
     | DeleteEventMessageError
     | ClearEventMessagesPending
     | ClearEventMessagesSuccess
-    | ClearEventMessagesError
-    | AddToFavouritesPending
-    | AddToFavouritesSuccess
-    | AddToFavouritesError
-    | RemoveFromFavouritesPending
-    | RemoveFromFavouritesSuccess
-    | RemoveFromFavouritesError;
+    | ClearEventMessagesError;

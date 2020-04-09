@@ -3,9 +3,9 @@
     <input matInput placeholder="Введите название" [(ngModel)]='searchText'>
 </mat-form-field>
 
-<div class='result-container' *ngIf='(user$ | async).favoriteRepos.ids.length > 0; else noSaved'>
+<div class='result-container' *ngIf='(favourites$ | async).ids.length > 0; else noSaved'>
     <app-repo-card @favouriteOnLeaveAnimation 
-    *ngFor='let repo of (user$ | async).favoriteRepos.entities | values | repoFilter:searchText'
+    *ngFor='let repo of (favourites$ | async).entities | values | repoFilter:searchText'
     [repo]='repo'></app-repo-card>
 </div>
 <ng-template #noSaved>

@@ -18,19 +18,22 @@ import { PatchUserError,
           ClearEventMessagesPending,
            ClearEventMessagesSuccess,
             ClearEventMessagesError,
-            AddToFavouritesPending,
-            AddToFavouritesSuccess,
-            AddToFavouritesError,
-            RemoveFromFavouritesPending,
-            RemoveFromFavouritesSuccess,
-            RemoveFromFavouritesError} from '../actions/user.actions';
+            SetUser,
+            } from '../actions/user.actions';
 import { IRepository } from '../reducers/search.reducer';
 import { MakeFavourite, MakeUnfavourite } from '../actions/search.actions';
+import { SetFavouritesPending } from '../actions/favourites.actions';
 
 
 @Injectable()
 export class UserEffects {
 
+    public onSetUser$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(UserActions.SET_USER),
+        switchMap((action: SetUser) => {
+            return of(new SetFavouritesPending(action.payload));
+        })
+    ));
     public patch$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(UserActions.PATCH_USER_PENDING),
         switchMap((action: PatchUserPending) => {
@@ -101,48 +104,6 @@ export class UserEffects {
                 );
         })
     ));
-
-    public addToFavourites$: Observable<Action> = createEffect(() => this.actions$.pipe(
-        ofType(UserActions.ADD_TO_FAVOURITES_PENDING),
-        switchMap((action: AddToFavouritesPending) => {
-            return this.userService.addRepoToLocalStorage(action.payload)
-                .pipe(
-                    mergeMap((repo: IRepository) => {
-                        this.snackBar.open('Добавлено в избранное', '' , { duration: 2000 });
-                        return [
-                            new MakeFavourite(repo),
-                            new AddToFavouritesSuccess(repo),
-                            new AddEventMessagePending(`Вы добавили репозиторий в избранное`)
-                        ];
-                    }),
-                    catchError((err: Error) => {
-                        this.snackBar.open('Не удалось добавить в избранное', '' , { duration: 2000 });
-                        return of(new AddToFavouritesError(err));
-                    })
-                );
-        })
-    ));
-    public removeFromFavourites$: Observable<Action> = createEffect(() => this.actions$.pipe(
-        ofType(UserActions.REMOVE_FROM_FAVOURITES_PENDING),
-        switchMap((action: RemoveFromFavouritesPending) => {
-            return this.userService.deleteRepoFromLocalStorage(action.payload)
-                .pipe(
-                    mergeMap((repo: IRepository) => {
-                        this.snackBar.open('Удалено из избранного', '' , { duration: 2000 });
-                        return [
-                            new MakeUnfavourite(repo),
-                            new RemoveFromFavouritesSuccess(repo),
-                            new AddEventMessagePending(`Вы удалили репозиторий из избранного`)
-                        ];
-                    }),
-                    catchError((err: Error) => {
-                        this.snackBar.open('Не удалось удалить из избранного', '' , { duration: 2000 });
-                        return of(new RemoveFromFavouritesError(err));
-                    })
-                );
-        })
-    ));
-
 
     constructor(
         private actions$: Actions,

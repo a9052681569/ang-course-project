@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { IUser, IEvent, favouriteAdapter } from 'src/app/store/reducers/user.reducer';
-import { IRepository } from 'src/app/store/reducers/search.reducer';
+import { IUser, IEvent } from 'src/app/store/reducers/user.reducer';
 
 @Injectable()
 export class UsersService {
@@ -25,12 +24,12 @@ export class UsersService {
 
   public addMessageToLocalStorage(event: IEvent): Observable<IEvent> {
     const actualUser = this.getActualUser();
-
-    actualUser.events.length > 30 ?
-    actualUser.events.splice(1).push(event)
-    :
-    actualUser.events.push(event);
-
+    if (actualUser.events.length >= 30) {
+      actualUser.events.splice(0, 1);
+      actualUser.events.push(event);
+    } else {
+      actualUser.events.push(event);
+    }
     localStorage.setItem(actualUser.username, JSON.stringify(actualUser));
     return of(event);
   }
@@ -54,22 +53,6 @@ export class UsersService {
     actualUser.events.splice(0);
     localStorage.setItem(actualUser.username, JSON.stringify(actualUser));
     return of(event);
-  }
-
-
-  public addRepoToLocalStorage(repo: IRepository): Observable<IRepository> {
-    const actualUser = this.getActualUser();
-    actualUser.favoriteRepos = favouriteAdapter.addOne({...repo, isFavourite: true}, actualUser.favoriteRepos);
-    localStorage.setItem(actualUser.username, JSON.stringify(actualUser));
-    return of(repo);
-  }
-
-
-  public deleteRepoFromLocalStorage(repo: IRepository): Observable<IRepository> {
-    const actualUser = this.getActualUser();
-    actualUser.favoriteRepos = favouriteAdapter.removeOne(repo.id, actualUser.favoriteRepos);
-    localStorage.setItem(actualUser.username, JSON.stringify(actualUser));
-    return of(repo);
   }
 
 

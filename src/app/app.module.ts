@@ -19,6 +19,7 @@ import { SearchService } from './shared/servises/search/search.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material';
 import { UsersService } from './shared/servises/users/users.service';
+import { FavouritesService } from './shared/servises/favourites/favourites.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UsersService } from './shared/servises/users/users.service';
     CustomPreloadService,
     AuthService,
     SearchService,
-    UsersService
+    UsersService,
+    FavouritesService
   ],
   bootstrap: [AppComponent]
 })

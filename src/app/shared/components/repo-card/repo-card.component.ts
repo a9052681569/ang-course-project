@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { IRepository } from 'src/app/store/reducers/search.reducer';
 import { Store } from '@ngrx/store';
 import { IRootState } from 'src/app/store';
-import { AddToFavouritesPending, RemoveFromFavouritesPending } from 'src/app/store/actions/user.actions';
+import { RemoveFromFavouritesPending, AddToFavouritesPending } from 'src/app/store/actions/favourites.actions';
+
 
 
 @Component({

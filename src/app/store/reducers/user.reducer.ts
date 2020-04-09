@@ -13,12 +13,6 @@ export interface IEvent {
     date: Date;
 }
 
-export interface IFavouriteState extends EntityState<IRepository> {}
-
-export const favouriteAdapter: EntityAdapter<IRepository> = createEntityAdapter<IRepository>();
-
-export const favoriteInitialState: IFavouriteState = favouriteAdapter.getInitialState();
-
 
 export interface IUser {
     name: string;
@@ -31,7 +25,6 @@ export interface IUser {
     gender: boolean;
     password: string;
     events: IEvent[];
-    favoriteRepos: IFavouriteState;
 }
 
 export const initialState: IUser = {
@@ -44,8 +37,7 @@ export const initialState: IUser = {
     address: [],
     gender: false,
     password: '',
-    events: [],
-    favoriteRepos: favoriteInitialState
+    events: []
 };
 
 export function userReducer(state: IUser = initialState, action: UserActionsType): IUser {
@@ -64,7 +56,7 @@ export function userReducer(state: IUser = initialState, action: UserActionsType
             };
         }
         case UserActions.ADD_EVENT_MESSAGE_SUCCESS: {
-            const updatedEvents = state.events.length > 30 ?
+            const updatedEvents = state.events.length >= 30 ?
             [...state.events.slice().splice(1), action.payload]
             :
             [...state.events, action.payload];
@@ -76,18 +68,6 @@ export function userReducer(state: IUser = initialState, action: UserActionsType
         }
         case UserActions.CLEAR_EVENT_MESSAGES_SUCCESS: {
             return {...state, events: []};
-        }
-        case UserActions.ADD_TO_FAVOURITES_SUCCESS: {
-            return {
-                ...state,
-                favoriteRepos: favouriteAdapter.addOne({...action.payload, isFavourite: true}, state.favoriteRepos)
-            };
-        }
-        case UserActions.REMOVE_FROM_FAVOURITES_SUCCESS: {
-            return {
-                ...state,
-                favoriteRepos: favouriteAdapter.removeOne(action.payload.id, state.favoriteRepos)
-            };
         }
         default: {
             return state;
