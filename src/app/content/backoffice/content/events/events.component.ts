@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { softAppearAnimation } from 'src/app/animations/soft-appear/soft-appear.animation';
 import { Store } from '@ngrx/store';
 import { IRootState } from 'src/app/store';
 import { IUser } from 'src/app/store/reducers/user.reducer';
 import { ClearEventMessagesPending, DeleteEventMessagePending } from 'src/app/store/actions/user.actions';
+import { softAppearAnimation } from 'src/app/shared/animations/soft-appear/soft-appear.animation';
 
 
 

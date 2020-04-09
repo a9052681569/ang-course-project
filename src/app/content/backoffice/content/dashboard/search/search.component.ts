@@ -5,7 +5,7 @@ import { IRootState } from 'src/app/store';
 import { ISearchState } from 'src/app/store/reducers/search.reducer';
 import { Observable } from 'rxjs';
 import { SearchPending } from 'src/app/store/actions/search.actions';
-import { opacityChangeAnimation } from 'src/app/animations/opacity-change/opacity-change.animation';
+import { opacityChangeAnimation } from 'src/app/shared/animations/opacity-change/opacity-change.animation';
 import { debounceTime } from 'rxjs/operators';
 
 

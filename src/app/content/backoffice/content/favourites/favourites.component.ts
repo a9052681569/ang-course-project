@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IRootState } from 'src/app/store';
 import { Observable } from 'rxjs';
-import { IUser } from 'src/app/store/reducers/user.reducer';
-import { favouriteOnLeaveAnimation } from 'src/app/animations/favourite-on-leave/favourite-on-leave';
 import { IFavouriteState } from 'src/app/store/reducers/favourites.reducer';
+import { favouriteOnLeaveAnimation } from 'src/app/shared/animations/favourite-on-leave/favourite-on-leave';
 
 
 @Component({

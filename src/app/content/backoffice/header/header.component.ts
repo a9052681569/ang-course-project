@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { MatSidenav } from '@angular/material/typings';
-import { StyleObject } from 'src/app/interfaces/style-object';
 import { IRootState } from 'src/app/store';
 import { Store } from '@ngrx/store';
 import { LogoutPending } from 'src/app/store/actions/auth.actions';
@@ -19,11 +18,6 @@ export class HeaderComponent {
   public drawer: MatSidenav;
 
   public constructor(private store: Store<IRootState>) {}
-
-  public headerStyles: StyleObject = {
-    color: 'orange',
-    'font-size': '18px'
-  };
 
   public logout(): void {
     this.store.dispatch(new LogoutPending());

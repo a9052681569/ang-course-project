@@ -24,10 +24,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './servises/auth/auth.service';
 import { SearchService } from './servises/search/search.service';
 import { UsersService } from './servises/users/users.service';
-import { SortByStarsPipe } from '../pipes/sort-by-stars/sort-by-stars.pipe';
+import { SortByStarsPipe } from './pipes/sort-by-stars/sort-by-stars.pipe';
 import { RepoCardComponent } from './components/repo-card/repo-card.component';
-import { RepoFilterPipe } from '../pipes/repo-filter/repo-filter.pipe';
-import { ValuesPipe } from '../pipes/values/values';
+import { RepoFilterPipe } from './pipes/repo-filter/repo-filter.pipe';
+import { ValuesPipe } from './pipes/values/values';
+
 
 export const modules: any[] = [
   CommonModule,
