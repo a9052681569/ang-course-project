@@ -9,10 +9,10 @@ const routes: Routes = [
     path: '',
     component: BackofficeComponent,
     children: [
-      { path: '', loadChildren: './content/dashboard/dashboard.module#DashboardModule'},
-      { path: 'events', loadChildren: './content/events/events.module#EventsModule'},
-      { path: 'user', loadChildren: './content/user-settings/user-settings.module#UserSettingsModule'},
-      { path: 'favourites', loadChildren: './content/favourites/favourites.module#FavouritesModule'}
+      { path: '', loadChildren: () => import('./content/dashboard/dashboard.module').then(m => m.DashboardModule)},
+      { path: 'events', loadChildren: () => import('./content/events/events.module').then(m => m.EventsModule)},
+      { path: 'user', loadChildren: () => import('./content/user-settings/user-settings.module').then(m => m.UserSettingsModule)},
+      { path: 'favourites', loadChildren: () => import('./content/favourites/favourites.module').then(m => m.FavouritesModule)}
     ]
   },
 ];

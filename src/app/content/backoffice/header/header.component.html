@@ -5,12 +5,6 @@
     <button mat-button>
         <h3 [routerLink]='["/"]' class="header__title">Unicorns Board</h3>
     </button>
-    <button mat-button (click)='previousPage()'>
-        <mat-icon>navigate_before</mat-icon>
-    </button>
-    <button mat-button (click)='nextPage()'>
-        <mat-icon>navigate_next</mat-icon>
-    </button>
     <span class="fill-space"></span>
     <button mat-icon-button [routerLink]='["events"]'>
         <mat-icon [matBadge]='(user$ | async).events.length' [matBadgeHidden]='false' matBadgeColor='warn'>

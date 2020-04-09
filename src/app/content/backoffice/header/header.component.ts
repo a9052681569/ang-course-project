@@ -27,12 +27,4 @@ export class HeaderComponent {
     return this.store.select('user');
   }
 
-  public previousPage(): void {
-    this.store.dispatch(new Back());
-  }
-
-  public nextPage(): void {
-    this.store.dispatch(new Forward());
-  }
-
 }
